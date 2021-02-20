@@ -10,7 +10,7 @@ class PostController extends Controller
     public function index()
     {
         //using eager loading to stop double up queries
-        $posts = Post::with(['user', 'likes'])->paginate(20);
+        $posts = Post::latest()->with(['user', 'likes'])->paginate(20);
 
         return view('posts.index', [
             'posts' => $posts
@@ -25,6 +25,15 @@ class PostController extends Controller
 
         //auth()->user()->posts()->create();
         $request->user()->posts()->create($request->only('body'));
+        return back();
+    }
+
+    public function destroy(Post $post)
+    {
+        if ($post->ownedBy(auth()->user())) {
+
+        }
+        $post->delete();
         return back();
     }
 }
