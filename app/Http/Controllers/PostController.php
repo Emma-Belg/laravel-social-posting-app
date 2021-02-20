@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::get(); //Laravel Collection
+        $posts = Post::paginate(10); //this creates a length aware paginator
 
         return view('posts.index', [
             'posts' => $posts
