@@ -13,7 +13,7 @@
     <nav class="p-6 bg-white flex justify-between mb-6">
         <ul class="flex items-centre">
             <li>
-                <a href="#" class="p-3">Home</a>
+                <a href=" {{ route('home') }}" class="p-3">Home</a>
             </li>
             <li>
                 <a href="{{ route('dashboard') }}" class="p-3">Dashboard</a>
@@ -28,7 +28,12 @@
                     <a href="#" class="p-3">User Name</a>
                 </li>
                 <li>
-                    <a href="#" class="p-3">Logout</a>
+                    <form class="inline p-3"
+                        action="{{ route('logout') }}"
+                        method="post">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
                 </li>
             @endauth
 
